@@ -1,0 +1,94 @@
+begin<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    >
+    <title>Kunkunshi Editor</title>
+  </head>
+
+  <body>
+
+    <div id="app">
+
+      <header>
+        <h1>Kunkunshi Editor</h1>
+      </header>
+
+      <nav></nav>
+
+      <aside></aside>
+
+      <article>
+
+        <div class="notes">
+          <div></div>
+        </div>
+
+      </article>
+
+      <footer>
+        <p>Clement MENORET</p>
+      </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script>
+      var app = new Vue( {
+        el: '#app',
+        data: {
+          pause: [
+            { key: '○' }
+          ],
+          notes: [
+            { key: '合' },
+            { key: '乙' },
+            { key: '老' },
+            { key: '四' },
+            { key: '上' },
+            { key: '中' },
+            { key: '尺' },
+            { key: '尺' },
+            { key: '工' },
+            { key: '五' },
+            { key: '六' },
+            { key: '七' },
+            { key: '八' },
+            { key: '九' }
+          ],
+          alterations: [
+            { key: '下', position: 'left' },
+            { key: '下', position: 'top' },
+            { key: '♯', position: 'right'  }
+          ],
+          rows: 12,
+          board: [
+            { content: '' },
+            { content: '' },
+            { content: '' },
+            { content: '' },
+            { content: '' },
+            { content: '' },
+            { content: '' },
+            { content: '' },
+            { content: '' },
+            { content: '' },
+            { content: '' },
+            { content: '' }
+          ]
+        },
+        created: {
+
+        },
+        methods: {
+        }
+      } )
+    </script>
+  </body>
+
+</html>
