@@ -1,4 +1,4 @@
-begin<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -8,6 +8,81 @@ begin<!DOCTYPE html>
       content="width=device-width, initial-scale=1.0"
     >
     <title>Kunkunshi Editor</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-size: 10px;
+        font-family: sans-serif;
+      }
+
+      body {
+        font-size: 1.5rem;
+      }
+
+      .notes {
+        direction: rtl;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        grid-auto-flow: column;
+      }
+
+      .rows_12 {
+        grid-template-rows: repeat(24, auto);
+      }
+
+      .rows_16 {
+        grid-template-rows: repeat(32, auto);
+      }
+
+      .cell {
+        width: 4rem;
+        height: 2rem;
+        text-align: center;
+        box-shadow: 1px 0px 0px 0px black inset, -1px 0px 0px 0px black inset;
+      }
+
+      .cell.selected {
+        background-color: rgba(0,128,196,.5);
+      }
+
+      .halfCell_0.top {
+        padding-top: 1rem;
+        box-shadow: 0px 1px 0px 0px black inset, 1px 0px 0px 0px black inset, -1px 0px 0px 0px black inset;
+      }
+
+      .halfCell_1 {
+        position: relative;
+        font-size: 75%;
+      }
+
+      .halfCell_1:not(.bottom):after {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        height: 1px;
+        background: rgba(0, 0, 0, .1);
+        content: '';
+        width: 100%;
+      }
+
+      .halfCell_0.preBottom {
+        padding-bottom: 1rem;
+      }
+
+      .halfCell_1.bottom {
+        box-shadow: 0px 1px 0px 0px black inset;
+      }
+
+      /* .halfCell_2 {
+        box-shadow: 0px -1px 0px 0px black inset, 1px 0px 0px 0px black inset, -1px 0px 0px 0px black inset;
+      } */
+
+    </style>
   </head>
 
   <body>
@@ -24,8 +99,21 @@ begin<!DOCTYPE html>
 
       <article>
 
-        <div class="notes">
-          <div></div>
+        <div
+          class="notes"
+          :class="'rows_' + this.rows"
+        >
+          <div
+            v-for="(halfCell, index) in board"
+            class="cell"
+            v-bind:class="{
+              [ 'halfCell_' + ( index % 2 ) ]: true,
+              top: halfCell.bTop,
+              preBottom: halfCell.bPreBottom,
+              bottom: halfCell.bBottom,
+              selected: halfCell.bSelected
+            }"
+          >{{ halfCell.content }}</div>
         </div>
 
       </article>
@@ -39,6 +127,8 @@ begin<!DOCTYPE html>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
     <script>
+      const isSet = v => ( null === v ) || ( 'undefined' === typeof v )
+
       var app = new Vue( {
         el: '#app',
         data: {
@@ -46,46 +136,79 @@ begin<!DOCTYPE html>
             { key: '○' }
           ],
           notes: [
-            { key: '合' },
-            { key: '乙' },
-            { key: '老' },
-            { key: '四' },
-            { key: '上' },
-            { key: '中' },
-            { key: '尺' },
-            { key: '尺' },
-            { key: '工' },
-            { key: '五' },
-            { key: '六' },
-            { key: '七' },
-            { key: '八' },
-            { key: '九' }
+            { key: '合', romaji: 'AI' },
+            { key: '乙', romaji: 'OTSU' },
+            { key: '老', romaji: 'ROO' },
+            { key: '四', romaji: 'SHI' },
+            { key: '上', romaji: 'JOO' },
+            { key: '中', romaji: 'CHUU' },
+            { key: '尺', romaji: 'SHAKU' },
+            { key: '工', romaji: 'KO' },
+            { key: '五', romaji: 'GO' },
+            { key: '六', romaji: 'ROKU' },
+            { key: '七', romaji: 'SHICHI' },
+            { key: '八', romaji: 'HACHI' },
+            { key: '九', romaji: 'KYU' }
           ],
           alterations: [
-            { key: '下', position: 'left' },
-            { key: '下', position: 'top' },
-            { key: '♯', position: 'right'  }
+            { key: '下', position: 'left', romaji: 'SHITA' },
+            { key: '♯', position: 'right', romaji: 'SHARP' }
           ],
           rows: 12,
-          board: [
-            { content: '' },
-            { content: '' },
-            { content: '' },
-            { content: '' },
-            { content: '' },
-            { content: '' },
-            { content: '' },
-            { content: '' },
-            { content: '' },
-            { content: '' },
-            { content: '' },
-            { content: '' }
-          ]
-        },
-        created: {
-
+          board: []
         },
         methods: {
+          addColumn: function( n ) {
+            const maxHalfCellsPerRow = 2 * n
+            const lastCellIndex = maxHalfCellsPerRow - 1
+            for ( let index = 0; index < maxHalfCellsPerRow; index += 1 ) {
+              this.board.push( {
+                content: '',
+                bTop: !index,
+                bPreBottom: index === ( lastCellIndex - 1 ),
+                bBottom: index === lastCellIndex,
+                bSelected: false
+              } )
+            }
+          }
+        },
+        created: function() {
+          this.addColumn( this.rows )
+          this.addColumn( this.rows )
+
+          const newColumn = [ ...this.board ]
+
+          // init with asadoyayunta
+
+          newColumn[ 0 ].content = '中'
+          newColumn[ 2 ].content = '工'
+          newColumn[ 4 ].content = '七'
+          newColumn[ 6 ].content = '合'
+          newColumn[ 7 ].content = '四'
+          newColumn[ 8 ].content = '七'
+          newColumn[ 10 ].content = '合'
+          newColumn[ 12 ].content = '七'
+          newColumn[ 14 ].content = '七'
+          newColumn[ 16 ].content = '五'
+          newColumn[ 18 ].content = '工'
+          newColumn[ 20 ].content = '四'
+          newColumn[ 22 ].content = '上'
+
+          newColumn[ 24 ].content = '中'
+          newColumn[ 26 ].content = '工'
+          newColumn[ 28 ].content = '合'
+          newColumn[ 30 ].content = '工'
+          newColumn[ 32 ].content = '合'
+          newColumn[ 34 ].content = '五'
+          newColumn[ 36 ].content = '工'
+          newColumn[ 38 ].content = '○'
+          newColumn[ 40 ].content = '四'
+          newColumn[ 42 ].content = '合'
+          newColumn[ 43 ].content = '四'
+          newColumn[ 44 ].content = '上'
+          newColumn[ 46 ].content = '合'
+
+          this.board = newColumn
         }
       } )
     </script>
