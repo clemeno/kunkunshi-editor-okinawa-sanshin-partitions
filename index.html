@@ -22,12 +22,15 @@
       }
 
       .notes {
+        padding: 1rem;
         direction: rtl;
         display: grid;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
         align-content: center;
         grid-auto-flow: column;
+        column-gap: 1rem;
+        outline: 1px solid black;
       }
 
       .rows_12 {
@@ -42,21 +45,26 @@
         width: 4rem;
         height: 2rem;
         text-align: center;
-        box-shadow: 1px 0px 0px 0px black inset, -1px 0px 0px 0px black inset;
+        box-shadow: -1px 0px 0px 0px black, -1px 0px 0px 0px black inset;
       }
 
       .cell.selected {
-        background-color: rgba(0,128,196,.5);
+        background-color: rgba(0, 128, 196, .5);
       }
 
-      .halfCell_0.top {
-        padding-top: 1rem;
-        box-shadow: 0px 1px 0px 0px black inset, 1px 0px 0px 0px black inset, -1px 0px 0px 0px black inset;
+      .halfCell_0 {
+        position: relative;
+        font-size: 120%;
       }
 
       .halfCell_1 {
         position: relative;
-        font-size: 75%;
+        font-size: 80%;
+      }
+
+      .halfCell_0.top {
+        padding-top: 1rem;
+        box-shadow: 0px 1px 0px 0px black inset, -1px 0px 0px 0px black, -1px 0px 0px 0px black inset;
       }
 
       .halfCell_1:not(.bottom):after {
@@ -170,45 +178,35 @@
                 bSelected: false
               } )
             }
+          },
+          import: function( songData ) {
+            if ( Array.isArray( songData.boardContents ) ) {
+              this.board = []
+              const nColumnsRequired = Math.ceil( songData.boardContents.length / ( this.rows * 2 ) )
+              for (let index = 0; index < nColumnsRequired; index += 1 ) {
+                this.addColumn( this.rows )
+              }
+              const newBoard = [ ...this.board ]
+              songData.boardContents.forEach( ( content, i ) => newBoard[ i ].content = content )
+              this.board = newBoard
+            }
           }
         },
         created: function() {
-          this.addColumn( this.rows )
-          this.addColumn( this.rows )
-
-          const newColumn = [ ...this.board ]
-
           // init with asadoyayunta
-
-          newColumn[ 0 ].content = '中'
-          newColumn[ 2 ].content = '工'
-          newColumn[ 4 ].content = '七'
-          newColumn[ 6 ].content = '合'
-          newColumn[ 7 ].content = '四'
-          newColumn[ 8 ].content = '七'
-          newColumn[ 10 ].content = '合'
-          newColumn[ 12 ].content = '七'
-          newColumn[ 14 ].content = '七'
-          newColumn[ 16 ].content = '五'
-          newColumn[ 18 ].content = '工'
-          newColumn[ 20 ].content = '四'
-          newColumn[ 22 ].content = '上'
-
-          newColumn[ 24 ].content = '中'
-          newColumn[ 26 ].content = '工'
-          newColumn[ 28 ].content = '合'
-          newColumn[ 30 ].content = '工'
-          newColumn[ 32 ].content = '合'
-          newColumn[ 34 ].content = '五'
-          newColumn[ 36 ].content = '工'
-          newColumn[ 38 ].content = '○'
-          newColumn[ 40 ].content = '四'
-          newColumn[ 42 ].content = '合'
-          newColumn[ 43 ].content = '四'
-          newColumn[ 44 ].content = '上'
-          newColumn[ 46 ].content = '合'
-
-          this.board = newColumn
+          const asadoyayuntaData = {
+            boardContents: [
+              '中', '', '工', '', '七', '', '合', '四', '七', '', '合', '', '七', '', '七', '', '五', '', '工', '', '四', '', '上', '',
+              '中', '', '工', '', '合', '', '工', '', '合', '', '五', '', '工', '', '○', '', '四', '', '合', '四', '上', '', '合', '',
+              '中', '', '上', '', '合', '', '工', '', '合', '', '乙', '', '四', '', '中', '', '上', '', '老', '', '四', '', '○', '',
+              '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+              '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+              '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+              '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+              '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''
+            ]
+          }
+          this.import( asadoyayuntaData )
         }
       } )
     </script>
