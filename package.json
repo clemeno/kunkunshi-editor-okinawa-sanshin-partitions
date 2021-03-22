@@ -47,7 +47,8 @@
   "ts-standard": {
     "ignore": [
       "dist",
-      "node_modules"
+      "node_modules",
+      "**/*.js"
     ]
   }
 }
