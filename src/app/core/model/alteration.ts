@@ -1,6 +1,6 @@
 
 // alterations
-export abstract class Kunkunshi {
+export abstract class Alteration {
   // key
   display!: string
   // romaji
