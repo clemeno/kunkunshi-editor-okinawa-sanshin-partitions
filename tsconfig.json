@@ -14,13 +14,20 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
+    "target": "ES2015",
+    "module": "ES2020",
     "lib": [
-      "es2018",
-      "dom"
+      "ES2020",
+      "DOM"
+    ],
+    "types": [
+      "cypress"
     ]
   },
+  "include": [
+    "cypress/**/*",
+    "src/**/*"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
