@@ -11,18 +11,15 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$app-primary: mat-palette($mat-indigo);
-$app-accent: mat-palette($mat-pink, A200, A100, A400);
+$app-primary: mat-palette($mat-light-blue, 300, 50, 500);
+$app-accent: mat-palette($mat-cyan, 300, 50, 500);
 
 // The warn palette is optional (defaults to red).
-$app-warn: mat-palette($mat-red);
+$app-warn: mat-palette($mat-amber, 300, 50, 500 );
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$app-theme: mat-light-theme((color: (primary: $app-primary,
-      accent: $app-accent,
-      warn: $app-warn,
-    )));
+$app-theme: mat-light-theme((color: (primary: $app-primary, accent: $app-accent, warn: $app-warn, )));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -36,7 +33,12 @@ body {
   height: 100%;
 }
 
+html {
+  font-size: 10px;
+}
+
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: sans-serif;
+  font-size: 1.5rem;
 }

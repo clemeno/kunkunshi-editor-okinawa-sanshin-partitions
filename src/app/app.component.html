@@ -1,8 +1,72 @@
-
 <!-- <router-outlet></router-outlet> -->
 
 <div class="app_layout">
-  <ol>
-    <li *ngFor="let kksItem of kksList">{{ kksItem.key }}</li>
-  </ol>
+  <header>
+    <div class="alteration_layout">
+      <div class="prefix alteration_row">
+        <button
+          mat-mini-fab
+          color="default"
+          [matTooltip]="alteration.shita.romaji.join( ' / ' )"
+        >{{ alteration.shita.key }}</button>
+      </div>
+      <div class="postfix alteration_row">
+        <button
+          mat-mini-fab
+          color="default"
+          [matTooltip]="alteration.flat.romaji.join( ' / ' )"
+        >{{ alteration.flat.key }}</button>
+        <button
+          mat-mini-fab
+          color="default"
+          [matTooltip]="alteration.sharp.romaji.join( ' / ' )"
+        >{{ alteration.sharp.key }}</button>
+      </div>
+      <div class="playstyle alteration_row">
+        <button
+          mat-mini-fab
+          color="default"
+          [matTooltip]="alteration.tap.romaji.join( ' / ' )"
+        >{{ alteration.tap.key }}</button>
+        <button
+          mat-mini-fab
+          color="default"
+          [matTooltip]="alteration.upward.romaji.join( ' / ' )"
+        >{{ alteration.upward.key }}</button>
+      </div>
+    </div>
+    <div class="pause">
+      <button
+        mat-mini-fab
+        color="default"
+        [matTooltip]="pause.romaji.join( ' / ' )"
+      >{{ pause.key }}</button>
+    </div>
+    <div class="kunkunshi_input_buttons">
+      <div class="lower_string_row string_row">
+        <button
+          *ngFor="let kks of note.lowerLeftToRight"
+          mat-mini-fab
+          color="default"
+          [matTooltip]="kks.romaji.join( ' / ' )"
+        >{{ kks.key }}</button>
+      </div>
+      <div class="middle_string_row string_row">
+        <button
+          *ngFor="let kks of note.middleLeftToRight"
+          mat-mini-fab
+          color="default"
+          [matTooltip]="kks.romaji.join( ' / ' )"
+        >{{ kks.key }}</button>
+      </div>
+      <div class="upper_string_row string_row">
+        <button
+          *ngFor="let kks of note.upperLeftToRight"
+          mat-mini-fab
+          color="default"
+          [matTooltip]="kks.romaji.join( ' / ' )"
+        >{{ kks.key }}</button>
+      </div>
+    </div>
+  </header>
 </div>

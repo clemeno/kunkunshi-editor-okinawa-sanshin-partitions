@@ -1,10 +1,10 @@
 import { Alteration } from 'src/app/core/model/alteration'
 
 export const ALTERATIONS_DATA: Alteration[] = [
-  { key: '下', romaji: ['shita'], position: 'before' },
-  { key: '♭', romaji: ['flat'], position: 'after' },
-  // { key: '♮', romaji: [ 'natural' ], position: 'after' },
-  { key: '♯', romaji: ['sharp'], position: 'after' },
-  { key: '`', romaji: ['tap'], position: 'after' },
-  { key: '⌝', romaji: ['upward'], position: 'after' }
+  { key: '下', romaji: ['Shita'], position: 'before' },
+  { key: '♭', romaji: ['Flat'], position: 'after' },
+  // { key: '♮', romaji: [ 'Natural' ], position: 'after' },
+  { key: '♯', romaji: ['Sharp'], position: 'after' },
+  { key: '`', romaji: ['Tap'], position: 'after' },
+  { key: '⌝', romaji: ['Upward'], position: 'after' }
 ]

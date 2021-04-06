@@ -1,0 +1,52 @@
+
+.app_layout {
+  header {
+    padding: 1rem;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    align-items: start;
+    gap: 1rem;
+
+    button {
+      font-weight: 100;
+      font-size: 2rem;
+    }
+
+    .alteration_layout {
+      display: grid;
+      grid-auto-flow: row;
+      justify-content: start;
+      align-items: start;
+      gap: 1rem;
+
+      .alteration_row {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        align-items: start;
+        gap: 1rem;
+      }
+    }
+
+    .pause {
+      align-self: center;
+    }
+
+    .kunkunshi_input_buttons {
+      display: grid;
+      grid-auto-flow: row;
+      justify-content: start;
+      align-items: start;
+      gap: 1rem;
+
+      .string_row {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        align-items: start;
+        gap: 1rem;
+      }
+    }
+  }
+}
