@@ -68,5 +68,44 @@
         >{{ kks.key }}</button>
       </div>
     </div>
+    <div class="settings">
+      <form [formGroup]="settingsFormGroup">
+        <!-- <mat-form-field
+          appearance="outline"
+          class="trim"
+          style="width: 5em;"
+        >
+          <mat-label>Height</mat-label>
+          <input
+            formControlName="height"
+            matInput
+          >
+        </mat-form-field> -->
+        <mat-form-field
+          appearance="outline"
+          class="trim"
+          style="width:6em"
+        >
+          <mat-label>Height</mat-label>
+          <mat-select formControlName="height">
+            <mat-option
+              *ngFor="let option of heigthSelector"
+              [value]="option.value"
+            >{{ option.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
   </header>
+  <form
+    [formGroup]="musicSheetFormGroup"
+    id="music_sheet"
+  >
+    <ng-container *ngFor="let cell of musicSheetState">
+      <div>{{ cell.va?.key }}</div>
+      <div>{{ cell.vb?.key }}</div>
+      <div>{{ cell.vc?.key }}</div>
+      <div>{{ cell.vd?.key }}</div>
+    </ng-container>
+  </form>
 </div>

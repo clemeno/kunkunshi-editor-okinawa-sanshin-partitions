@@ -11,7 +11,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$app-primary: mat-palette($mat-light-blue, 300, 50, 500);
+$app-primary: mat-palette($mat-light-blue, 400, 300, 600);
 $app-accent: mat-palette($mat-cyan, 300, 50, 500);
 
 // The warn palette is optional (defaults to red).
@@ -28,6 +28,11 @@ $app-theme: mat-light-theme((color: (primary: $app-primary, accent: $app-accent,
 
 /* You can add global styles to this file, and also import other style files */
 
+@mixin trim {
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
   height: 100%;
@@ -41,4 +46,25 @@ body {
   margin: 0;
   font-family: sans-serif;
   font-size: 1.5rem;
+}
+
+.trim,
+.trim .mat-form-field-wrapper {
+  @include trim();
+}
+
+.mat-form-field-appearance-outline {
+  .mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.6em 0;
+  }
+
+  .mat-form-field-label-wrapper {
+    top: -1.3em;
+  }
+
+  &.mat-form-field-can-float.mat-form-field-should-float {
+    .mat-form-field-label {
+      transform: translateY(-1.1em) scale(0.75);
+    }
+  }
 }
